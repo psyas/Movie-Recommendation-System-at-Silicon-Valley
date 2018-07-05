@@ -1,2 +1,34 @@
-# Movie-Recommendation-System-at-Silicon-Valley - in progress
-We are building movie recommendation system using Kaggle datasets at Silicon Valley. Starting at 27 / JUN / 2018.
+#Inflearn 
+#: IMDB 영화 리뷰 감정분석을 통한 파이썬 자연어 처리 1
+
+
+### 이 노트북은 다음과 같이 구성됨
+### 1. 텍스트 전처리
+1. Raw review가 들어왔을 때
+2. BeautifulSoup4를 통해 HTML5 태그 모두 제거
+3. 정규표현식을 통해 특수문자를 모두 제거
+4. 텍스트를 소문자로 변환
+5. 공백을 기준으로 텍스트를 분해하여 리스트 반환
+6. NLTK를 이용해서 불용어(stopwords) 제거
+7. 어간 추출 및 음소 표기법 (stemming)
+8. WordCloud를 통해 단어의 등장횟수 시각화
+9. seaborn을 활용한 리뷰별 단어의 개수 통계 및 시각화
+
+### 2. 텍스트 데이터 벡터화
+1. 머신 러닝 모델이 이해할 수 있는 형태로 토큰을 벡터로 변환
+2. scikit learn 의 CountVectorizer를 통해 피쳐 생성
+3. 최소 min_df 이상 나타난 token 개수를 세어서 각 리뷰별로 벡터화를 진행
+4. sklearn의 pipeline을 이용해서 처리속도 가속화
+5. 25000개의 리뷰에 대해 25000 * 20000의 행렬이 만들어짐
+6. 각 리뷰의 벡터는 각 토큰의 리뷰 데이터에서의 등장횟수를 나타냄
+7. pandas를 통해 결과를 저장한다.
+
+### 3. 랜덤 포레스트 머신러닝 모델 학습
+#### 랜덤 포레스트의 가장 핵심적인 특징은 임의성(randomness)에 의해 서로 조금씩 다른 특성을 갖는 트리들로 구성된다는 점이다. 이 특징은 각 트리들의 예측들이 decorrelation되게 하며, 결과적으로 일반화(generalization) 성능을 향상시킨다. 또한 임의화는 포레스트가 노이지가 포함돈 데이터에 대해서도 잘 돌아가게 만든다.
+
+1. 학습을 시키고
+2. np.mean을 통해 점수를 얻는다.
+3. CountVectorizer를 통해 전처리된 테스트 데이터에 대한 피처값을 얻고
+4. 피처값을 머신러닝 모델에 넣어 predict를 진행한 후 결과를 데이터그램에 저장한다.
+5. 데이터그램을 seaborn의 countplot으로 시각화하고
+6. csv 파일로 내보낸 뒤 캐글에 업로드하는 것으로 첫 번째 튜토리얼을 마친다.
